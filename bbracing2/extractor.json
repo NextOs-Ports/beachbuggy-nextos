@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "bbracing2",
-  "version": "1",
+  "version": "2",
   "title": "BEACH BUGGY RACING 2",
   "abi_order": [
     "arm64-v8a"
@@ -29,8 +29,7 @@
       "destination": "gamedata/lib/arm64-v8a/libmain.so",
       "validate": {
         "type": "file",
-        "size": 18609432,
-        "sha256": "56cd8ea0c9f44ad7c8c4cd2e8ee69e8e9620a20ac447c7db265bd0312d59caed",
+        "min_size": 8000000,
         "elf_machine": "{abi}"
       }
     },
@@ -45,8 +44,7 @@
       "destination": "gamedata/lib/arm64-v8a/libfmod.so",
       "validate": {
         "type": "file",
-        "size": 1472528,
-        "sha256": "fbb2ee0f88bcbd79ad1449d74215f421efa2456b3397da49229986bcfc2f27ad",
+        "min_size": 800000,
         "elf_machine": "{abi}"
       }
     },
@@ -61,8 +59,7 @@
       "destination": "gamedata/lib/arm64-v8a/libfmodstudio.so",
       "validate": {
         "type": "file",
-        "size": 1289248,
-        "sha256": "cfd56bcf1cc3a8f683f6aa8f23dabdb01226fb93200f50e90a914e36c785f095",
+        "min_size": 600000,
         "elf_machine": "{abi}"
       }
     },
@@ -77,8 +74,7 @@
       "destination": "gamedata/lib/arm64-v8a/libc++_shared.so",
       "validate": {
         "type": "file",
-        "size": 1253544,
-        "sha256": "cd61762848882a16c8244c964a6f396c0caa0b440588a210ce9cc4ab0e6d9f0c",
+        "min_size": 500000,
         "elf_machine": "{abi}"
       }
     },
@@ -93,8 +89,8 @@
       "destination": "gamedata/assets/Assets.apf",
       "validate": {
         "type": "file",
-        "size": 208037888,
-        "sha256": "f0074b6a976f74becedcaef9369bbe7b171b0baa63cd62f1331ec0d2711b2975"
+        "min_size": 100000000,
+        "magic_ascii": "FPUV"
       }
     },
     {
@@ -108,8 +104,8 @@
       "destination": "gamedata/assets/HW.apf",
       "validate": {
         "type": "file",
-        "size": 15205326,
-        "sha256": "0291687adec2e63856d64145630185caffd6d7b6a0e7968fe99a05692a60b678"
+        "min_size": 1000000,
+        "magic_ascii": "FPUV"
       }
     },
     {
@@ -123,46 +119,41 @@
       "destination": "gamedata/assets/AVConfig.json",
       "validate": {
         "type": "file",
-        "size": 176220,
-        "sha256": "301935ee6ea4053a2c18ee04d325dd3cf733e1a8810e36f01d439e255924a520"
-      }
+        "min_size": 1000
+      },
+      "required": false
     }
   ],
   "validate": [
     {
       "path": "gamedata/lib/arm64-v8a/libmain.so",
       "type": "file",
-      "size": 18609432
+      "min_size": 8000000
     },
     {
       "path": "gamedata/lib/arm64-v8a/libfmod.so",
       "type": "file",
-      "size": 1472528
+      "min_size": 800000
     },
     {
       "path": "gamedata/lib/arm64-v8a/libfmodstudio.so",
       "type": "file",
-      "size": 1289248
+      "min_size": 600000
     },
     {
       "path": "gamedata/lib/arm64-v8a/libc++_shared.so",
       "type": "file",
-      "size": 1253544
+      "min_size": 500000
     },
     {
       "path": "gamedata/assets/Assets.apf",
       "type": "file",
-      "size": 208037888
+      "min_size": 100000000
     },
     {
       "path": "gamedata/assets/HW.apf",
       "type": "file",
-      "size": 15205326
-    },
-    {
-      "path": "gamedata/assets/AVConfig.json",
-      "type": "file",
-      "size": 176220
+      "min_size": 1000000
     }
   ],
   "commit": [
