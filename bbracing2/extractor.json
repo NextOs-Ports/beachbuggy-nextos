@@ -1,0 +1,178 @@
+{
+  "schema": 1,
+  "id": "bbracing2",
+  "version": "1",
+  "title": "BEACH BUGGY RACING 2",
+  "abi_order": [
+    "arm64-v8a"
+  ],
+  "input": {
+    "search_dirs": [
+      "gamedata",
+      "."
+    ],
+    "prefer_first_nonempty": true,
+    "sniff_all_in_primary": true,
+    "packages": [
+      "com.vectorunit.cobalt.googleplay"
+    ]
+  },
+  "extract": [
+    {
+      "id": "engine",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "lib/{abi}/libmain.so"
+        ]
+      },
+      "destination": "gamedata/lib/arm64-v8a/libmain.so",
+      "validate": {
+        "type": "file",
+        "size": 18609432,
+        "sha256": "56cd8ea0c9f44ad7c8c4cd2e8ee69e8e9620a20ac447c7db265bd0312d59caed",
+        "elf_machine": "{abi}"
+      }
+    },
+    {
+      "id": "fmod",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "lib/{abi}/libfmod.so"
+        ]
+      },
+      "destination": "gamedata/lib/arm64-v8a/libfmod.so",
+      "validate": {
+        "type": "file",
+        "size": 1472528,
+        "sha256": "fbb2ee0f88bcbd79ad1449d74215f421efa2456b3397da49229986bcfc2f27ad",
+        "elf_machine": "{abi}"
+      }
+    },
+    {
+      "id": "fmodstudio",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "lib/{abi}/libfmodstudio.so"
+        ]
+      },
+      "destination": "gamedata/lib/arm64-v8a/libfmodstudio.so",
+      "validate": {
+        "type": "file",
+        "size": 1289248,
+        "sha256": "cfd56bcf1cc3a8f683f6aa8f23dabdb01226fb93200f50e90a914e36c785f095",
+        "elf_machine": "{abi}"
+      }
+    },
+    {
+      "id": "libcxx",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "lib/{abi}/libc++_shared.so"
+        ]
+      },
+      "destination": "gamedata/lib/arm64-v8a/libc++_shared.so",
+      "validate": {
+        "type": "file",
+        "size": 1253544,
+        "sha256": "cd61762848882a16c8244c964a6f396c0caa0b440588a210ce9cc4ab0e6d9f0c",
+        "elf_machine": "{abi}"
+      }
+    },
+    {
+      "id": "assets",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "assets/Assets.apf"
+        ]
+      },
+      "destination": "gamedata/assets/Assets.apf",
+      "validate": {
+        "type": "file",
+        "size": 208037888,
+        "sha256": "f0074b6a976f74becedcaef9369bbe7b171b0baa63cd62f1331ec0d2711b2975"
+      }
+    },
+    {
+      "id": "hw",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "assets/HW.apf"
+        ]
+      },
+      "destination": "gamedata/assets/HW.apf",
+      "validate": {
+        "type": "file",
+        "size": 15205326,
+        "sha256": "0291687adec2e63856d64145630185caffd6d7b6a0e7968fe99a05692a60b678"
+      }
+    },
+    {
+      "id": "avconfig",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "assets/AVConfig.json"
+        ]
+      },
+      "destination": "gamedata/assets/AVConfig.json",
+      "validate": {
+        "type": "file",
+        "size": 176220,
+        "sha256": "301935ee6ea4053a2c18ee04d325dd3cf733e1a8810e36f01d439e255924a520"
+      }
+    }
+  ],
+  "validate": [
+    {
+      "path": "gamedata/lib/arm64-v8a/libmain.so",
+      "type": "file",
+      "size": 18609432
+    },
+    {
+      "path": "gamedata/lib/arm64-v8a/libfmod.so",
+      "type": "file",
+      "size": 1472528
+    },
+    {
+      "path": "gamedata/lib/arm64-v8a/libfmodstudio.so",
+      "type": "file",
+      "size": 1289248
+    },
+    {
+      "path": "gamedata/lib/arm64-v8a/libc++_shared.so",
+      "type": "file",
+      "size": 1253544
+    },
+    {
+      "path": "gamedata/assets/Assets.apf",
+      "type": "file",
+      "size": 208037888
+    },
+    {
+      "path": "gamedata/assets/HW.apf",
+      "type": "file",
+      "size": 15205326
+    },
+    {
+      "path": "gamedata/assets/AVConfig.json",
+      "type": "file",
+      "size": 176220
+    }
+  ],
+  "commit": [
+    "gamedata"
+  ],
+  "marker": ".nxextract-bbracing2.json",
+  "space": {
+    "safety_bytes": 268435456
+  },
+  "log": "nxextract.log",
+  "ui_success_seconds": 1,
+  "ui_error_seconds": 5
+}

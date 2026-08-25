@@ -1,0 +1,198 @@
+{
+  "schema": 1,
+  "id": "beachbuggy",
+  "version": "1",
+  "title": "BEACH BUGGY RACING",
+  "abi_order": [
+    "arm64-v8a"
+  ],
+  "input": {
+    "search_dirs": [
+      "gamedata",
+      "."
+    ],
+    "prefer_first_nonempty": true,
+    "sniff_all_in_primary": true,
+    "packages": [
+      "com.vectorunit.purple.googleplay"
+    ]
+  },
+  "extract": [
+    {
+      "id": "engine",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "lib/{abi}/libmain.so"
+        ]
+      },
+      "destination": "gamedata/lib/arm64-v8a/libmain.so",
+      "validate": {
+        "type": "file",
+        "size": 9996416,
+        "sha256": "011edfb6783bb2d8b70ad54074e9a88a988cd8a5e310c4498f049c2b54bfdb35",
+        "elf_machine": "{abi}"
+      }
+    },
+    {
+      "id": "fmod",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "lib/{abi}/libfmod.so"
+        ]
+      },
+      "destination": "gamedata/lib/arm64-v8a/libfmod.so",
+      "validate": {
+        "type": "file",
+        "size": 1783824,
+        "sha256": "ed6bf4674e95294ebf79225d3170fbacd4d47e0159eef293c2ae021030a51cb2",
+        "elf_machine": "{abi}"
+      }
+    },
+    {
+      "id": "fmodstudio",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "lib/{abi}/libfmodstudio.so"
+        ]
+      },
+      "destination": "gamedata/lib/arm64-v8a/libfmodstudio.so",
+      "validate": {
+        "type": "file",
+        "size": 1288216,
+        "sha256": "83b2d357b947e60114e54ed2a81c793bf8a45f18c942415a9cad081f1276924c",
+        "elf_machine": "{abi}"
+      }
+    },
+    {
+      "id": "libcxx",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "lib/{abi}/libc++_shared.so"
+        ]
+      },
+      "destination": "gamedata/lib/arm64-v8a/libc++_shared.so",
+      "validate": {
+        "type": "file",
+        "size": 1374336,
+        "sha256": "c4c2fe5cbcb1fba0003a31fc7ab29a9bb12df6cc187ec45a806462540e83d93b",
+        "elf_machine": "{abi}"
+      }
+    },
+    {
+      "id": "assets",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "assets/Assets.apf"
+        ]
+      },
+      "destination": "gamedata/assets/Assets.apf",
+      "validate": {
+        "type": "file",
+        "size": 75452334,
+        "sha256": "1acac7d935cb85052c832e1a9d442eb2bd576ed1d6f893fb4110525896205a84"
+      }
+    },
+    {
+      "id": "avconfig",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "assets/AVConfig.json"
+        ]
+      },
+      "destination": "gamedata/assets/AVConfig.json",
+      "validate": {
+        "type": "file",
+        "size": 176220,
+        "sha256": "301935ee6ea4053a2c18ee04d325dd3cf733e1a8810e36f01d439e255924a520"
+      }
+    },
+    {
+      "id": "dic",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "assets/dic"
+        ]
+      },
+      "destination": "gamedata/assets/dic",
+      "validate": {
+        "type": "file",
+        "size": 4016,
+        "sha256": "08a598423c6747c3c23fffb2fb12c2c3cf611986436a367d99b5acca3e6590c7"
+      }
+    },
+    {
+      "id": "dataseed",
+      "source": {
+        "kind": "entry",
+        "patterns": [
+          "assets/data.save"
+        ]
+      },
+      "destination": "gamedata/assets/data.save",
+      "validate": {
+        "type": "file",
+        "size": 140048,
+        "sha256": "665fa16667ec6ba4d4e3b89fdc3aed26718a1bd50f11342a7130340dc01d62aa"
+      }
+    }
+  ],
+  "validate": [
+    {
+      "path": "gamedata/lib/arm64-v8a/libmain.so",
+      "type": "file",
+      "size": 9996416
+    },
+    {
+      "path": "gamedata/lib/arm64-v8a/libfmod.so",
+      "type": "file",
+      "size": 1783824
+    },
+    {
+      "path": "gamedata/lib/arm64-v8a/libfmodstudio.so",
+      "type": "file",
+      "size": 1288216
+    },
+    {
+      "path": "gamedata/lib/arm64-v8a/libc++_shared.so",
+      "type": "file",
+      "size": 1374336
+    },
+    {
+      "path": "gamedata/assets/Assets.apf",
+      "type": "file",
+      "size": 75452334
+    },
+    {
+      "path": "gamedata/assets/AVConfig.json",
+      "type": "file",
+      "size": 176220
+    },
+    {
+      "path": "gamedata/assets/dic",
+      "type": "file",
+      "size": 4016
+    },
+    {
+      "path": "gamedata/assets/data.save",
+      "type": "file",
+      "size": 140048
+    }
+  ],
+  "commit": [
+    "gamedata"
+  ],
+  "marker": ".nxextract-beachbuggy.json",
+  "space": {
+    "safety_bytes": 268435456
+  },
+  "log": "nxextract.log",
+  "ui_success_seconds": 1,
+  "ui_error_seconds": 5
+}
