@@ -142,20 +142,66 @@ static bool my_SDL_PollEvent(SDL_Event *event) {
  * provedor explicito. */
 static SDL_Window *my_SDL_CreateWindow(const char *title, int w, int h,
                                        SDL_WindowFlags flags) {
-  SDL_Window *win = SDL_CreateWindow(title, w, h, flags);
-  if (win == NULL && SDL_GetHint(SDL_HINT_EGL_LIBRARY) == NULL &&
-      getenv("SDL_VIDEO_EGL_DRIVER") == NULL) {
-    logPrintf("[video] SDL_CreateWindow falhou (%s); provedores portateis\n",
-              SDL_GetError());
-    /* SDL3 congela o ambiente no init: setenv nao chega nos hints. O canal
-     * vivo e' SDL_SetHint (SDL_HINT_EGL_LIBRARY/SDL_HINT_OPENGL_LIBRARY). */
-    SDL_SetHint(SDL_HINT_EGL_LIBRARY, "libEGL.so");
-    SDL_SetHint(SDL_HINT_OPENGL_LIBRARY, "libGLESv2.so");
-    win = SDL_CreateWindow(title, w, h, flags);
-    if (win == NULL) {
-      SDL_ResetHint(SDL_HINT_EGL_LIBRARY);
-      SDL_ResetHint(SDL_HINT_OPENGL_LIBRARY);
+  /* Selecao de provedor EGL/GL da JANELA por MEDICAO (mesma licao do nxgl e
+   * da ponte EGL: nenhum nome fixo acerta em todas as firmwares — dArkOS,
+   * ArkOS, ROCKNIX, muOS, Knulli, AmberELEC tem cadeias diferentes e ate'
+   * cruzadas). A prova de vida e' a propria janela abrir. Ordem: o provedor
+   * herdado do frontend (nomes SDL2 traduzidos p/ hints SDL3 — o ES do
+   * ArkOS/dArkOS exporta SDL_VIDEO_EGL_DRIVER e o SDL3 nao le), o default
+   * da firmware, e entao os nomes portateis/versionados/blob. */
+  static const struct {
+    const char *egl;
+    const char *gl;
+    const char *label;
+  } k_providers[] = {
+    { NULL, NULL, "frontend/default" },
+    { "libEGL.so", "libGLESv2.so", "portatil" },
+    { "libEGL.so.1", "libGLESv2.so.2", "versionado" },
+    { "libmali.so", "libmali.so", "blob-mali" },
+    { "libMali.so", "libMali.so", "blob-Mali" },
+  };
+  const char *env_egl = getenv("SDL_VIDEO_EGL_DRIVER");
+  const char *env_gl = getenv("SDL_VIDEO_GL_DRIVER");
+  SDL_Window *win = NULL;
+  size_t i;
+
+  for (i = 0; i < sizeof(k_providers) / sizeof(k_providers[0]); ++i) {
+    const char *egl = k_providers[i].egl;
+    const char *gl = k_providers[i].gl;
+    if (i == 0) {
+      /* Honrar o provedor explicito do frontend, traduzido para o SDL3. */
+      if (env_egl != NULL && env_egl[0] != '\0') {
+        SDL_SetHint(SDL_HINT_EGL_LIBRARY, env_egl);
+        if (env_gl != NULL && env_gl[0] != '\0')
+          SDL_SetHint(SDL_HINT_OPENGL_LIBRARY, env_gl);
+      } else {
+        SDL_ResetHint(SDL_HINT_EGL_LIBRARY);
+        SDL_ResetHint(SDL_HINT_OPENGL_LIBRARY);
+      }
+    } else {
+      const char *prev = SDL_GetHint(SDL_HINT_EGL_LIBRARY);
+      if (prev != NULL && strcmp(prev, egl) == 0)
+        continue; /* identico ao que acabou de falhar */
+      SDL_SetHint(SDL_HINT_EGL_LIBRARY, egl);
+      SDL_SetHint(SDL_HINT_OPENGL_LIBRARY, gl);
     }
+    win = SDL_CreateWindow(title, w, h, flags);
+    if (win != NULL) {
+      logPrintf("[video] janela aberta com provedor %s (EGL=%s GL=%s)\n",
+                k_providers[i].label,
+                SDL_GetHint(SDL_HINT_EGL_LIBRARY) != NULL
+                    ? SDL_GetHint(SDL_HINT_EGL_LIBRARY) : "default",
+                SDL_GetHint(SDL_HINT_OPENGL_LIBRARY) != NULL
+                    ? SDL_GetHint(SDL_HINT_OPENGL_LIBRARY) : "default");
+      break;
+    }
+    logPrintf("[video] provedor %s falhou: %s\n", k_providers[i].label,
+              SDL_GetError());
+  }
+  if (win == NULL) {
+    SDL_ResetHint(SDL_HINT_EGL_LIBRARY);
+    SDL_ResetHint(SDL_HINT_OPENGL_LIBRARY);
+    logPrintf("[video] NENHUM provedor abriu a janela\n");
   }
   logPrintf("[video] SDL_CreateWindow -> %p (%s)\n", (void *)win,
             win != NULL ? "ok" : SDL_GetError());

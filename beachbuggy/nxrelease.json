@@ -75,7 +75,7 @@
         "libz.so.1"
       ],
       "provenance": "port build script; framework pinned by FRAMEWORK-PIN.json",
-      "sha256": "82e22e7c995f5207afe47b7533b55ed3f6b7cc8dfb5ec722634eb611d6309732",
+      "sha256": "99e9b51b613657d85612b9422e69a77e760f283a80f1c43b9105452a46be851e",
       "soname": null,
       "source": "beachbuggy",
       "target": "beachbuggy/beachbuggy"

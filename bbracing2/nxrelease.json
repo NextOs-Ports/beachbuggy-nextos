@@ -75,7 +75,7 @@
         "libz.so.1"
       ],
       "provenance": "port build script; framework pinned by FRAMEWORK-PIN.json",
-      "sha256": "7dfc6c7fff0981b692027ca074cc71be11ee24ae3b5acaca94e530c58e6f6e9e",
+      "sha256": "5a6f3a0b0c502a035d96b9fa236e5532790938c9498d17f15c70fb9ad31472df",
       "soname": null,
       "source": "bbracing2",
       "target": "bbracing2/bbracing2"
