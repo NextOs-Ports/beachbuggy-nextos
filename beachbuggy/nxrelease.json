@@ -75,7 +75,7 @@
         "libz.so.1"
       ],
       "provenance": "port build script; framework pinned by FRAMEWORK-PIN.json",
-      "sha256": "99e9b51b613657d85612b9422e69a77e760f283a80f1c43b9105452a46be851e",
+      "sha256": "5ea57369beaf35ef42aaecfc44d728642bc30abdc760894c4eb8101ff7656a47",
       "soname": null,
       "source": "beachbuggy",
       "target": "beachbuggy/beachbuggy"
@@ -133,7 +133,7 @@
     {
       "kind": "payload",
       "mode": "0644",
-      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+      "sha256": "44e161e4495cac2cf7858043e9e6418e9579f0ddcfae826f9a372622968ce066",
       "source": "version.txt",
       "target": "beachbuggy/version.txt"
     },
@@ -149,7 +149,7 @@
         "libpthread.so.0"
       ],
       "provenance": "bundled runtime dependency",
-      "sha256": "6bc343a848e532db3c36a5e9ea451cbd9169a13264ab10eea6e46b1c3880f470",
+      "sha256": "dd830926f57401042bc62d6e6462736f68866c84deba2074d1fff40ad5747c46",
       "soname": "libSDL3.so.0",
       "source": "lib/libSDL3.so.0",
       "target": "beachbuggy/lib/libSDL3.so.0"
@@ -238,7 +238,7 @@
     },
     "port_dir": "beachbuggy",
     "profile": "universal-portmaster",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "portmaster_metadata": {
     "gameinfo_xml": {
