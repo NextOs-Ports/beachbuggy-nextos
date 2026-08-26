@@ -312,6 +312,21 @@ static void my_glLinkProgram(GLuint program) {
   }
 }
 
+/* Builds oficiais recentes vem embrulhados pelo PairIP (protecao da Play
+ * Store): a libfmod.so importa `ExecuteProgram` da VM de licenca
+ * (libpairipcore.so), que nao existe fora do Android. Sem resolver, o slot
+ * fica envenenado e o construtor da lib segfaulta na carga. Stub que retorna
+ * sucesso (mesma receita provada no GTA III DE). */
+static int g_pairip_calls = 0;
+static long stub_ExecuteProgram(void *a, void *b, void *c, void *d,
+                                void *e, void *f, void *g, void *h) {
+  (void)a; (void)b; (void)c; (void)d; (void)e; (void)f; (void)g; (void)h;
+  if (g_pairip_calls < 16)
+    logPrintf("[pairip] ExecuteProgram stub call #%d -> 0\n", g_pairip_calls);
+  g_pairip_calls++;
+  return 0;
+}
+
 static DynLibFunction base_symbols[] = {
   // ctype & errno
   { "_ctype_", (uintptr_t)&_ctype_ },
@@ -328,6 +343,9 @@ static DynLibFunction base_symbols[] = {
   { "__FD_SET_chk", (uintptr_t)__FD_SET_chk },
   { "__assert2", (uintptr_t)__assert2 },
   { "android_set_abort_message", (uintptr_t)android_set_abort_message },
+
+  // PairIP (builds recentes da Play Store embrulham a libfmod.so)
+  { "ExecuteProgram", (uintptr_t)stub_ExecuteProgram },
 
   // stdio mappings for __sF
   { "fflush", (uintptr_t)bb_fflush },
